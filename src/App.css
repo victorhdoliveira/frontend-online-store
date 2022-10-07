@@ -4,11 +4,6 @@
 
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 /* @media (prefers-reduced-motion : no-preference) {
 
   .App-logo {
@@ -42,3 +37,8 @@
     transform: rotate(360deg);
   }
 } */
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
