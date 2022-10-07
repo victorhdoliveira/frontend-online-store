@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
+import HomePage from './Pages/HomePage';
 
-class App extends Component {
-  render() {
-    return <div> </div>;
-  }
+function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={ HomePage } />
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
