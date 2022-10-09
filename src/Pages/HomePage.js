@@ -80,8 +80,10 @@ class HomePage extends React.Component {
             {stateCategory && productsFromCategory
               .map((product) => (
                 <li key={ product.id } data-testid="product">
-                  {product.title}
-                  {product.price}
+                  <Link to={ `/product/${product.id}` } data-testid="product-detail-link">
+                    {product.title}
+                    {product.price}
+                  </Link>
                   <img src={ product.thumbnail } alt={ product.title } />
                 </li>))}
           </ul>
@@ -104,12 +106,14 @@ class HomePage extends React.Component {
             <ul>
               { list.map((item) => (
                 <li key={ item.id } data-testid="product">
-                  { item.title }
-                  <br />
-                  { item.price }
-                  <br />
-                  <img src={ item.thumbnail } alt={ item.title } />
-                  <br />
+                  <Link to={ `/product/${item.id}` } data-testid="product-detail-link">
+                    { item.title }
+                    <br />
+                    { item.price }
+                    <br />
+                    <img src={ item.thumbnail } alt={ item.title } />
+                    <br />
+                  </Link>
                 </li>
               ))}
             </ul>)}
