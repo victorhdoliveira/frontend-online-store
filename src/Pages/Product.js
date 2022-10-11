@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { getProductByRealId } from '../services/api';
 
 class Product extends React.Component {
@@ -21,9 +21,19 @@ class Product extends React.Component {
     this.setState({ data });
   };
 
+  addCarrinho = async () => {
+    const { data } = this.state;
+    const productsLocalStorage = JSON.parse(localStorage.getItem('listCart'));
+    if (productsLocalStorage === null) {
+      localStorage.setItem('listCart', JSON.stringify([data]));
+    } else {
+      localStorage.setItem('listCart', JSON
+        .stringify([...productsLocalStorage, data]));
+    }
+  };
+
   render() {
     const { data } = this.state;
-    console.log(data);
     return (
       <div>
         <Link to="/shopping-card" data-testid="shopping-cart-button">
@@ -36,7 +46,13 @@ class Product extends React.Component {
           alt="Foto do Produto"
         />
         <p data-testid="product-detail-price">{` Preço: ${data.price} R$`}</p>
-
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addCarrinho }
+        >
+          Adcionar ao carrinho
+        </button>
       </div>
     );
   }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery, getProductById }
-  from '../services/api';
+import {
+  getCategories, getProductById, getProductsFromCategoryAndQuery
+} from '../services/api';
 
 class HomePage extends React.Component {
   constructor() {
@@ -47,6 +48,18 @@ class HomePage extends React.Component {
     });
   };
 
+  addProductShoppingCard = (product) => {
+    const productsLocalStorage = JSON.parse(localStorage.getItem('listCart'));
+    if (productsLocalStorage === null) {
+      localStorage.setItem('listCart', JSON.stringify([product]));
+      // this.setState({ target.id });
+    } else {
+      // const newProducts = productsLocalStorage.concat(JSON.stringify(product));
+      localStorage.setItem('listCart', JSON
+        .stringify([...productsLocalStorage, product]));
+    }
+  };
+
   render() {
     const { list, categories, valueInput, stateResearch,
       productsFromCategory, stateCategory } = this.state;
@@ -85,6 +98,14 @@ class HomePage extends React.Component {
                     {product.price}
                   </Link>
                   <img src={ product.thumbnail } alt={ product.title } />
+                  <button
+                    id={ product.id }
+                    type="button"
+                    data-testid="product-add-to-cart"
+                    onClick={ () => this.addProductShoppingCard(product) }
+                  >
+                    Adicionar no carrinho
+                  </button>
                 </li>))}
           </ul>
         </div>
