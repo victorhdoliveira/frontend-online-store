@@ -8,12 +8,84 @@ class Product extends React.Component {
     super();
     this.state = {
       data: {},
+      email: '',
+      rating: 0,
+      textareaInpt: '',
+      error: false,
+      review: [],
+      // reviewRender: [],
+      valid: false,
     };
   }
 
   componentDidMount() {
     this.getDataFromProduct();
+    this.getReviews();
   }
+
+  // talvez tenar criar outro state pra guardar o valor vindo do getitem e só entao fazer o map, mas ai teria que pegar o jeito do trybetunes que cria um array no localstorage
+  saveReview = () => {
+    const { review } = this.state;
+    localStorage.setItem('totalReview', JSON.stringify(review));
+  };
+
+  getReviews = () => {
+    const valueReview = JSON.parse(localStorage.getItem('totalReview'));
+    if (valueReview !== null) {
+      this.setState({
+        review: valueReview,
+      });
+    }
+  };
+
+  // peguei esse regex no stackoverflow
+  validator = () => {
+    const { email, rating } = this.state;
+    const emailValidator = email
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      );
+    const valor = 0;
+    const ratingValidator = rating > valor;
+    return emailValidator && ratingValidator;
+  };
+
+  clickButton = () => {
+    const { email, rating, textareaInpt, valid, review } = this.state;
+    if (valid) {
+      const dadosReview = { emailR: email, textareaInptR: textareaInpt, ratingR: rating };
+      review.push(dadosReview);
+      this.saveReview();
+      this.setState({
+        email: '',
+        textareaInpt: '',
+        valid: false,
+      });
+    } else {
+      this.setState({ error: true });
+    }
+  };
+
+  changeValid = () => {
+    if (this.validator()) {
+      this.setState({
+        valid: true,
+      });
+    } else {
+      this.setState({
+        valid: false,
+      });
+    }
+  };
+
+  handleChangeInpt = (event) => {
+    const { value, name } = event.target;
+    this.setState({
+      [name]: value,
+      error: false,
+    }, () => this.changeValid());
+  };
 
   getDataFromProduct = async () => {
     const { match: { params } } = this.props;
@@ -22,21 +94,115 @@ class Product extends React.Component {
   };
 
   render() {
-    const { data } = this.state;
-    console.log(data);
+    const { data, email, textareaInpt, error, review } = this.state;
     return (
       <div>
-        <Link to="/shopping-card" data-testid="shopping-cart-button">
-          Carrinho de compras
-        </Link>
-        <h2 data-testid="product-detail-name">{data.title}</h2>
-        <img
-          src={ data.thumbnail }
-          data-testid="product-detail-image"
-          alt="Foto do Produto"
-        />
-        <p data-testid="product-detail-price">{` Preço: ${data.price} R$`}</p>
+        <div>
+          <Link to="/shopping-card" data-testid="shopping-cart-button">
+            Carrinho de compras
+          </Link>
+          <h2 data-testid="product-detail-name">{data.title}</h2>
+          <img
+            src={ data.thumbnail }
+            data-testid="product-detail-image"
+            alt="Foto do Produto"
+          />
+          <p data-testid="product-detail-price">{` Preço: ${data.price} R$`}</p>
 
+        </div>
+        <div>
+          <form>
+            <input
+              data-testid="product-detail-email"
+              type="text"
+              name="email"
+              placeholder="Email"
+              value={ email }
+              onChange={ this.handleChangeInpt }
+            />
+
+            <label htmlFor="rating1">
+              <input
+                type="radio"
+                name="rating"
+                value="1"
+                id="rating1"
+                onChange={ this.handleChangeInpt }
+                data-testid="1-rating"
+              />
+
+            </label>
+            <label htmlFor="rating2">
+              <input
+                type="radio"
+                name="rating"
+                value="2"
+                id="rating2"
+                onChange={ this.handleChangeInpt }
+                data-testid="2-rating"
+              />
+
+            </label>
+            <label htmlFor="rating3">
+              <input
+                type="radio"
+                name="rating"
+                value="3"
+                id="rating3"
+                onChange={ this.handleChangeInpt }
+                data-testid="3-rating"
+              />
+
+            </label>
+            <label htmlFor="rating4">
+              <input
+                type="radio"
+                name="rating"
+                value="4"
+                id="rating4"
+                onChange={ this.handleChangeInpt }
+                data-testid="4-rating"
+              />
+
+            </label>
+            <label htmlFor="rating5">
+              <input
+                type="radio"
+                name="rating"
+                value="5"
+                id="rating5"
+                onChange={ this.handleChangeInpt }
+                data-testid="5-rating"
+              />
+
+            </label>
+
+            <textarea
+              data-testid="product-detail-evaluation"
+              placeholder="Mensagem detalhada (opcional)"
+              name="textareaInpt"
+              value={ textareaInpt }
+              onChange={ this.handleChangeInpt }
+            />
+            <button
+              type="button"
+              data-testid="submit-review-btn"
+              onClick={ this.clickButton }
+            >
+              Avaliar
+
+            </button>
+            {error && <p data-testid="error-msg">Campos inválidos</p>}
+          </form>
+          <div>
+            {review.map((valor, index) => (
+              <li key={ index }>
+                <span data-testid="review-card-email">{valor.emailR}</span>
+                <h4>{`${valor.ratingR}`}</h4>
+                <p data-testid="review-card-evaluation">{valor.textareaInptR}</p>
+              </li>))}
+          </div>
+        </div>
       </div>
     );
   }
