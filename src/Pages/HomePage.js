@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  getCategories, getProductById, getProductsFromCategoryAndQuery
+  getCategories, getProductById, getProductsFromCategoryAndQuery,
 } from '../services/api';
 
 class HomePage extends React.Component {
