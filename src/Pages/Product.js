@@ -23,12 +23,18 @@ class Product extends React.Component {
 
   addCarrinho = async () => {
     const { data } = this.state;
-    localStorage.setItem('listCart', JSON.stringify(data));
+    const productsLocalStorage = localStorage.getItem('listCart');
+    if (productsLocalStorage === null) {
+      localStorage.setItem('listCart', data.id);
+    } else {
+      const newProducts = productsLocalStorage.concat(' # ', data.id);
+      localStorage.setItem('listCart', newProducts);
+    }
   };
 
   render() {
     const { data } = this.state;
-    console.log(data);
+    // console.log(data);
     return (
       <div>
         <Link to="/shopping-card" data-testid="shopping-cart-button">

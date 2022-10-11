@@ -1,10 +1,13 @@
 import React from 'react';
+import { getProductByRealId } from '../services/api';
 
 class ShoppingCard extends React.Component {
   constructor() {
     super();
     this.state = {
       listShoppingCard: [],
+      produtosTest: [],
+      ready: false,
     };
   }
 
@@ -13,25 +16,35 @@ class ShoppingCard extends React.Component {
   }
 
   quant = (id) => {
-    const { listShoppingCard } = this.state;
-    const quant = listShoppingCard.filter((item) => item.id === id);
+    const { produtosTest } = this.state;
+    const quant = produtosTest.filter((item) => item.id === id);
     return quant.length;
+  };
+
+  filtraList = (itemBreak) => {
+    const arr = [...new Set(itemBreak)];
+    const produtos = arr.map((item) => getProductByRealId(item));
+    Promise.all(produtos).then((values) => this.setState({
+      listShoppingCard: values,
+      ready: true,
+    }));
   };
 
   getListItem = () => {
     const itemString = localStorage.getItem('listCart');
-    const itemObjeto = JSON.parse(itemString);
-    this.setState((prev) => ({
-      listShoppingCard: [...prev.listShoppingCard, itemObjeto],
-    }));
+    const itemBreak = itemString.split(' # ');
+    const produtos = itemBreak.map((item) => getProductByRealId(item));
+    Promise.all(produtos).then((values) => this.setState({
+      produtosTest: values,
+    }, this.filtraList(itemBreak)));
   };
 
   render() {
-    const { listShoppingCard } = this.state;
+    const { produtosTest, listShoppingCard, ready } = this.state;
     return (
       <>
         <div>
-          { listShoppingCard.length === 0 && (
+          { produtosTest.length === 0 && (
             <p
               data-testid="shopping-cart-empty-message"
             >
@@ -39,12 +52,11 @@ class ShoppingCard extends React.Component {
             </p>) }
         </div>
         <div>
-          {listShoppingCard.map((item, ind) => (
+          { ready && listShoppingCard.map((item, ind) => (
             <section
               key={ ind }
-              data-testid="shopping-cart-product-name"
             >
-              <p>{item.title}</p>
+              <p data-testid="shopping-cart-product-name">{item.title}</p>
               <img src={ item.thumbnail } alt={ item.title } />
               <p>{item.price}</p>
               <p data-testid="shopping-cart-product-quantity">
