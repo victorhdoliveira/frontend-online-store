@@ -1,12 +1,10 @@
 import React from 'react';
-import { getProductByRealId } from '../services/api';
 
 class ShoppingCard extends React.Component {
   constructor() {
     super();
     this.state = {
       listShoppingCard: [],
-      produtosTest: [],
       ready: false,
     };
   }
@@ -15,59 +13,47 @@ class ShoppingCard extends React.Component {
     this.getListItem();
   }
 
-  quant = (id) => {
-    const { produtosTest } = this.state;
-    const quant = produtosTest.filter((item) => item.id === id);
-    return quant.length;
-  };
-
-  filtraList = (itemBreak) => {
-    const arr = [...new Set(itemBreak)];
-    const produtos = arr.map((item) => getProductByRealId(item));
-    Promise.all(produtos).then((values) => this.setState({
-      listShoppingCard: values,
-      ready: true,
-    }));
-  };
-
   getListItem = () => {
     const itemString = localStorage.getItem('listCart');
-    const itemBreak = itemString.split(' # ');
-    const produtos = itemBreak.map((item) => getProductByRealId(item));
-    Promise.all(produtos).then((values) => this.setState({
-      produtosTest: values,
-    }, this.filtraList(itemBreak)));
+    if (itemString !== null) {
+      const itemBreak = JSON.parse(itemString);
+      const ids = itemBreak.map((item) => item.id);
+      const arrayProductsNoRepeat = ids
+        .filter((product, index, array) => array.indexOf(product) === index);
+      const arrayFiltered = arrayProductsNoRepeat.map((id) => (
+        itemBreak.filter((item) => item.id === id)
+      ));
+      this.setState({
+        listShoppingCard: arrayFiltered,
+        ready: true,
+      });
+    }
   };
 
   render() {
-    const { produtosTest, listShoppingCard, ready } = this.state;
+    const { listShoppingCard, ready } = this.state;
     return (
-      <>
-        <div>
-          { produtosTest.length === 0 && (
-            <p
-              data-testid="shopping-cart-empty-message"
-            >
-              Seu carrinho está vazio
-            </p>) }
-        </div>
-        <div>
-          { ready && listShoppingCard.map((item, ind) => (
-            <section
-              key={ ind }
-            >
-              <p data-testid="shopping-cart-product-name">{item.title}</p>
-              <img src={ item.thumbnail } alt={ item.title } />
-              <p>{item.price}</p>
-              <p data-testid="shopping-cart-product-quantity">
-                { `Quantidade ${this.quant(item.id)}`}
-              </p>
-            </section>
-          ))}
-        </div>
-      </>
+      <div>
+        { ready ? listShoppingCard.map((item, ind) => (
+          <section
+            key={ ind }
+          >
+            <p data-testid="shopping-cart-product-name">{item[0].title}</p>
+            <img src={ item[0].thumbnail } alt={ item[0].title } />
+            <p>{item[0].price}</p>
+            <p data-testid="shopping-cart-product-quantity">
+              { `Quantidade ${item.length}`}
+            </p>
+          </section>
+        )) : (
+          <p
+            data-testid="shopping-cart-empty-message"
+          >
+            Seu carrinho está vazio
+          </p>)}
+      </div>
+
     );
   }
 }
-
 export default ShoppingCard;
