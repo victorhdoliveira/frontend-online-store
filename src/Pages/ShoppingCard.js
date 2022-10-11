@@ -20,11 +20,11 @@ class ShoppingCard extends React.Component {
       const ids = itemBreak.map((item) => item.id);
       const arrayProductsNoRepeat = ids
         .filter((product, index, array) => array.indexOf(product) === index);
-      const seiLaPorra = arrayProductsNoRepeat.map((id) => (
+      const arrayFiltered = arrayProductsNoRepeat.map((id) => (
         itemBreak.filter((item) => item.id === id)
       ));
       this.setState({
-        listShoppingCard: seiLaPorra,
+        listShoppingCard: arrayFiltered,
         ready: true,
       });
     }
