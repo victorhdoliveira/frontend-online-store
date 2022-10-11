@@ -5,6 +5,7 @@ class ShoppingCard extends React.Component {
     super();
     this.state = {
       listShoppingCard: [],
+      ready: false,
     };
   }
 
@@ -58,10 +59,12 @@ class ShoppingCard extends React.Component {
   };
 
   render() {
-    const { listShoppingCard } = this.state;
+    const { listShoppingCard, ready } = this.state;
     return (
       <div>
+
         { listShoppingCard.length > 0 ? listShoppingCard.map((item, ind) => (
+
           <section
             key={ ind }
           >
@@ -105,6 +108,7 @@ class ShoppingCard extends React.Component {
             Seu carrinho está vazio
           </p>)}
       </div>
+
     );
   }
 }
