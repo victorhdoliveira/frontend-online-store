@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery, getProductById }
-  from '../services/api';
+import {
+  getCategories, getProductById, getProductsFromCategoryAndQuery,
+} from '../services/api';
 
 class HomePage extends React.Component {
   constructor() {

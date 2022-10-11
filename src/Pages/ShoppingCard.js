@@ -5,7 +5,6 @@ class ShoppingCard extends React.Component {
     super();
     this.state = {
       listShoppingCard: [],
-      ready: false,
     };
   }
 
@@ -25,16 +24,46 @@ class ShoppingCard extends React.Component {
       ));
       this.setState({
         listShoppingCard: arrayFiltered,
-        ready: true,
       });
     }
   };
 
+  removeItem = ({ target: { name } }) => {
+    const { listShoppingCard } = this.state;
+    const id = name;
+    const allItems = listShoppingCard;
+    const newList = allItems.map((list) => list.filter((item) => item.id !== id));
+    const tiraArrayVazio = newList.filter((array) => array.length > 0);
+    localStorage.setItem('listCart', JSON.stringify(tiraArrayVazio));
+    this.setState({
+      listShoppingCard: tiraArrayVazio,
+    });
+  };
+
+  mudaQuantItem = ({ target: { name, value } }) => {
+    const { listShoppingCard } = this.state;
+    const id = name;
+    listShoppingCard.forEach((arrItem, ind, arr) => {
+      if (arrItem[0].id === id) {
+        if (value === 'sum') {
+          arrItem.push(arrItem[0]);
+          this.setState({ listShoppingCard: arr });
+        } else if (value === 'sub' && arrItem.length > 1) {
+          arrItem.shift(arrItem[0]);
+          console.log('test');
+          this.setState({ listShoppingCard: arr });
+        }
+      }
+    });
+  };
+
   render() {
-    const { listShoppingCard, ready } = this.state;
+    const { listShoppingCard } = this.state;
     return (
       <div>
-        { ready ? listShoppingCard.map((item, ind) => (
+
+        { listShoppingCard.length > 0 ? listShoppingCard.map((item, ind) => (
+
           <section
             key={ ind }
           >
@@ -44,6 +73,32 @@ class ShoppingCard extends React.Component {
             <p data-testid="shopping-cart-product-quantity">
               { `Quantidade ${item.length}`}
             </p>
+            <button
+              type="button"
+              data-testid="remove-product"
+              onClick={ this.removeItem }
+              name={ item[0].id }
+            >
+              X
+            </button>
+            <button
+              name={ item[0].id }
+              type="button"
+              value="sum"
+              onClick={ this.mudaQuantItem }
+              data-testid="product-increase-quantity"
+            >
+              +
+            </button>
+            <button
+              type="button"
+              name={ item[0].id }
+              value="sub"
+              onClick={ this.mudaQuantItem }
+              data-testid="product-decrease-quantity"
+            >
+              -
+            </button>
           </section>
         )) : (
           <p
