@@ -5,7 +5,6 @@ class ShoppingCard extends React.Component {
     super();
     this.state = {
       listShoppingCard: [],
-      ready: false,
     };
   }
 
@@ -59,7 +58,7 @@ class ShoppingCard extends React.Component {
   };
 
   render() {
-    const { listShoppingCard, ready } = this.state;
+    const { listShoppingCard } = this.state;
     return (
       <div>
 
