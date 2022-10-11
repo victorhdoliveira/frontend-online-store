@@ -21,6 +21,11 @@ class Product extends React.Component {
     this.setState({ data });
   };
 
+  addCarrinho = async () => {
+    const { data } = this.state;
+    localStorage.setItem('listCart', JSON.stringify(data));
+  };
+
   render() {
     const { data } = this.state;
     console.log(data);
@@ -36,7 +41,13 @@ class Product extends React.Component {
           alt="Foto do Produto"
         />
         <p data-testid="product-detail-price">{` Preço: ${data.price} R$`}</p>
-
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addCarrinho }
+        >
+          Adcionar ao carrinho
+        </button>
       </div>
     );
   }
