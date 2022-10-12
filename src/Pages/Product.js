@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { getProductByRealId } from '../services/api';
 
 class Product extends React.Component {
@@ -21,8 +21,7 @@ class Product extends React.Component {
     this.getDataFromProduct();
     this.getReviews();
   }
-
-  // talvez tenar criar outro state pra guardar o valor vindo do getitem e só entao fazer o map, mas ai teria que pegar o jeito do trybetunes que cria um array no localstorage
+  
   saveReview = () => {
     const { match: { params } } = this.props;
     const { review } = this.state;
@@ -92,6 +91,17 @@ class Product extends React.Component {
     const { match: { params } } = this.props;
     const data = await getProductByRealId(params.id);
     this.setState({ data });
+  };
+
+  addCarrinho = async () => {
+    const { data } = this.state;
+    const productsLocalStorage = JSON.parse(localStorage.getItem('listCart'));
+    if (productsLocalStorage === null) {
+      localStorage.setItem('listCart', JSON.stringify([data]));
+    } else {
+      localStorage.setItem('listCart', JSON
+        .stringify([...productsLocalStorage, data]));
+    }
   };
 
   render() {
