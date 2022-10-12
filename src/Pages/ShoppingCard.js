@@ -46,12 +46,11 @@ class ShoppingCard extends React.Component {
     const id = name;
     listShoppingCard.forEach((arrItem, ind, arr) => {
       if (arrItem[0].id === id) {
-        if (value === 'sum') {
+        if (value === 'sum' && arrItem[0].available_quantity > arrItem.length) {
           arrItem.push(arrItem[0]);
           this.setState({ listShoppingCard: arr });
         } else if (value === 'sub' && arrItem.length > 1) {
           arrItem.shift(arrItem[0]);
-          console.log('test');
           this.setState({ listShoppingCard: arr });
         }
       }
