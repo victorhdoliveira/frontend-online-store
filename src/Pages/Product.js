@@ -13,7 +13,6 @@ class Product extends React.Component {
       textareaInpt: '',
       error: false,
       review: [],
-      // reviewRender: [],
       valid: false,
     };
   }
@@ -25,12 +24,14 @@ class Product extends React.Component {
 
   // talvez tenar criar outro state pra guardar o valor vindo do getitem e só entao fazer o map, mas ai teria que pegar o jeito do trybetunes que cria um array no localstorage
   saveReview = () => {
+    const { match: { params } } = this.props;
     const { review } = this.state;
-    localStorage.setItem('totalReview', JSON.stringify(review));
+    localStorage.setItem(params.id, JSON.stringify(review));
   };
 
   getReviews = () => {
-    const valueReview = JSON.parse(localStorage.getItem('totalReview'));
+    const { match: { params } } = this.props;
+    const valueReview = JSON.parse(localStorage.getItem(params.id));
     if (valueReview !== null) {
       this.setState({
         review: valueReview,
@@ -196,11 +197,11 @@ class Product extends React.Component {
           </form>
           <div>
             {review.map((valor, index) => (
-              <li key={ index }>
-                <span data-testid="review-card-email">{valor.emailR}</span>
-                <h4>{`${valor.ratingR}`}</h4>
+              <div key={ index }>
+                <h4 data-testid="review-card-email">{valor.emailR}</h4>
+                <p data-testid="review-card-rating">{`Nota: ${valor.ratingR}`}</p>
                 <p data-testid="review-card-evaluation">{valor.textareaInptR}</p>
-              </li>))}
+              </div>))}
           </div>
         </div>
       </div>
