@@ -21,7 +21,7 @@ class Product extends React.Component {
     this.getDataFromProduct();
     this.getReviews();
   }
-  
+
   saveReview = () => {
     const { match: { params } } = this.props;
     const { review } = this.state;
@@ -119,6 +119,13 @@ class Product extends React.Component {
             alt="Foto do Produto"
           />
           <p data-testid="product-detail-price">{` Preço: ${data.price} R$`}</p>
+          <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={ this.addCarrinho }
+          >
+            Adcionar ao carrinho
+          </button>
 
         </div>
         <div>
