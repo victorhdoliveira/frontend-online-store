@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class ShoppingCard extends React.Component {
   constructor() {
@@ -61,6 +62,16 @@ class ShoppingCard extends React.Component {
     const { listShoppingCard } = this.state;
     return (
       <div>
+        { listShoppingCard.length > 0 && (
+          <Link to="/checkout">
+            <button
+              type="button"
+              data-testid="checkout-products"
+            >
+              Finalizar compra
+            </button>
+          </Link>
+        )}
 
         { listShoppingCard.length > 0 ? listShoppingCard.map((item, ind) => (
 
