@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getProductByRealId } from '../services/api';
+import { getListItem, getProductByRealId } from '../services/api';
 
 class Product extends React.Component {
   constructor() {
@@ -112,6 +112,7 @@ class Product extends React.Component {
           <Link to="/shopping-card" data-testid="shopping-cart-button">
             Carrinho de compras
           </Link>
+          <p data-testid="shopping-cart-size">{ getListItem() }</p>
           <h2 data-testid="product-detail-name">{data.title}</h2>
           <img
             src={ data.thumbnail }
@@ -126,7 +127,6 @@ class Product extends React.Component {
           >
             Adcionar ao carrinho
           </button>
-
         </div>
         <div>
           <form>
@@ -138,7 +138,6 @@ class Product extends React.Component {
               value={ email }
               onChange={ this.handleChangeInpt }
             />
-
             <label htmlFor="rating1">
               <input
                 type="radio"
@@ -148,7 +147,6 @@ class Product extends React.Component {
                 onChange={ this.handleChangeInpt }
                 data-testid="1-rating"
               />
-
             </label>
             <label htmlFor="rating2">
               <input
@@ -159,7 +157,6 @@ class Product extends React.Component {
                 onChange={ this.handleChangeInpt }
                 data-testid="2-rating"
               />
-
             </label>
             <label htmlFor="rating3">
               <input
@@ -170,7 +167,6 @@ class Product extends React.Component {
                 onChange={ this.handleChangeInpt }
                 data-testid="3-rating"
               />
-
             </label>
             <label htmlFor="rating4">
               <input
@@ -181,7 +177,6 @@ class Product extends React.Component {
                 onChange={ this.handleChangeInpt }
                 data-testid="4-rating"
               />
-
             </label>
             <label htmlFor="rating5">
               <input
@@ -192,9 +187,7 @@ class Product extends React.Component {
                 onChange={ this.handleChangeInpt }
                 data-testid="5-rating"
               />
-
             </label>
-
             <textarea
               data-testid="product-detail-evaluation"
               placeholder="Mensagem detalhada (opcional)"
@@ -208,7 +201,6 @@ class Product extends React.Component {
               onClick={ this.clickButton }
             >
               Avaliar
-
             </button>
             {error && <p data-testid="error-msg">Campos inválidos</p>}
           </form>
@@ -225,7 +217,6 @@ class Product extends React.Component {
     );
   }
 }
-
 Product.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -233,5 +224,4 @@ Product.propTypes = {
     }).isRequired,
   }).isRequired,
 };
-
 export default Product;
