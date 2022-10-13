@@ -98,6 +98,11 @@ class HomePage extends React.Component {
                     {product.price}
                   </Link>
                   <img src={ product.thumbnail } alt={ product.title } />
+                  {product.shipping.free_shipping && <img
+                    data-testid="free-shipping"
+                    src="https://img.irroba.com.br/fluzaoco/catalog/frete1.png"
+                    alt="imagem frete gratis"
+                  />}
                   <button
                     id={ product.id }
                     type="button"
@@ -134,6 +139,11 @@ class HomePage extends React.Component {
                     <br />
                     <img src={ item.thumbnail } alt={ item.title } />
                     <br />
+                    {item.shipping.free_shipping && <img
+                      data-testid="free-shipping"
+                      src="https://img.irroba.com.br/fluzaoco/catalog/frete1.png"
+                      alt="imagem frete gratis"
+                    />}
                   </Link>
                 </li>
               ))}
