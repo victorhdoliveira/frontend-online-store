@@ -139,7 +139,7 @@ class HomePage extends React.Component {
                     <br />
                     <img src={ item.thumbnail } alt={ item.title } />
                     <br />
-                    {product.shipping.free_shipping && <img
+                    {item.shipping.free_shipping && <img
                       data-testid="free-shipping"
                       src="https://img.irroba.com.br/fluzaoco/catalog/frete1.png"
                       alt="imagem frete gratis"
