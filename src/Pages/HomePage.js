@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  getCategories, getProductById, getProductsFromCategoryAndQuery,
+  getCategories, getListItem, getProductById, getProductsFromCategoryAndQuery,
 } from '../services/api';
 
 class HomePage extends React.Component {
@@ -14,12 +14,14 @@ class HomePage extends React.Component {
       list: [],
       stateResearch: false,
       valueInput: '',
+      stateCart: true,
     };
   }
 
   async componentDidMount() {
     const categoriesArray = await getCategories();
     this.setState({ categories: categoriesArray });
+    console.log(getListItem());
   }
 
   addValueInput = async ({ target }) => {
@@ -49,23 +51,25 @@ class HomePage extends React.Component {
   };
 
   addProductShoppingCard = (product) => {
+    this.setState({ stateCart: false });
     const productsLocalStorage = JSON.parse(localStorage.getItem('listCart'));
     if (productsLocalStorage === null) {
       localStorage.setItem('listCart', JSON.stringify([product]));
-      // this.setState({ target.id });
     } else {
-      // const newProducts = productsLocalStorage.concat(JSON.stringify(product));
       localStorage.setItem('listCart', JSON
         .stringify([...productsLocalStorage, product]));
     }
+    this.setState({ stateCart: true });
+    getListItem();
   };
 
   render() {
     const { list, categories, valueInput, stateResearch,
-      productsFromCategory, stateCategory } = this.state;
+      productsFromCategory, stateCategory, stateCart } = this.state;
     return (
       <>
         <div>
+          { stateCart && <p data-testid="shopping-cart-size">{ getListItem() }</p>}
           { list && (
             <p
               data-testid="home-initial-message"
@@ -153,5 +157,4 @@ class HomePage extends React.Component {
     );
   }
 }
-
 export default HomePage;

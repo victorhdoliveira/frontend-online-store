@@ -23,3 +23,23 @@ export async function getProductByRealId(id) {
   const data = await request.json();
   return data;
 }
+
+export function getListItem() {
+  const itemString = localStorage.getItem('listCart');
+  if (itemString !== null) {
+    const itemBreak = JSON.parse(itemString);
+    const ids = itemBreak.map((item) => item.id);
+    const arrayProductsNoRepeat = ids
+      .filter((product, index, array) => array.indexOf(product) === index);
+    const arrayFiltered = arrayProductsNoRepeat.map((id) => (
+      itemBreak.filter((item) => item.id === id)
+    ));
+    const qtItem = arrayFiltered.reduce((acc, curr) => {
+      acc += curr.length;
+      return acc;
+    }, 0);
+    localStorage.setItem('itemC', qtItem);
+    return qtItem;
+  }
+  return 0;
+}

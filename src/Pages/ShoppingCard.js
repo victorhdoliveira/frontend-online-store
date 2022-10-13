@@ -71,9 +71,7 @@ class ShoppingCard extends React.Component {
             </button>
           </Link>
         )}
-
         { listShoppingCard.length > 0 ? listShoppingCard.map((item, ind) => (
-
           <section
             key={ ind }
           >
@@ -117,7 +115,6 @@ class ShoppingCard extends React.Component {
             Seu carrinho está vazio
           </p>)}
       </div>
-
     );
   }
 }
