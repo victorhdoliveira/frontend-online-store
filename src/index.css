@@ -15,14 +15,16 @@ body {
 }
 
 input , select {
-  border: 0.5px solid #e2e3e400;
+  background-color: rgb(221, 221, 221, 0.8);
+  border: 0.2vw solid #e2e3e400;
   border-radius: 7px;
   box-shadow: 0 0 26px rgba(59, 59, 59, 0.8);
   color: rgb(0, 59, 229);
-  height: 28px;
-  margin: 8px;
+  height: 2em;
+  margin: 1em;
+  min-width: 5vw;
+  padding: 0.2em 1em;
   text-align: center;
-  width: 20vw;
 }
 
 a {

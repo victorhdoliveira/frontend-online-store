@@ -16,16 +16,16 @@
   font-size: clamp(0.6em, 0.6em + 0.8vw, 1.4em);
   letter-spacing: 0.06em;
   padding: 15px 0;
-  text-shadow: 0 0 15px rgba(221, 221, 221, 0.7), 0 0 10px rgba(221, 221, 221, 0.7);
+  text-shadow: 0 0 15px rgba(221, 221, 221, 0.7) , 0 0 10px rgba(221, 221, 221, 0.7);
   width: 100%;
 }
 
 .header_title_cart {
-  text-align: end;
   margin-left: 15vh;
+  text-align: end;
 }
 
-.header_title_cart h1 , h3 {
+.header_title_cart h1, h3 {
   margin: 0;
 }
 
@@ -69,8 +69,8 @@
 }
 
 .item_cart h3 {
-  max-height: 2.4em;
   margin: 4px 0;
+  max-height: 2.4em;
   overflow: hidden;
 }
 
@@ -117,23 +117,23 @@
 }
 
 #addButton:after {
-  background-color:  rgb(84, 231, 71);
+  background-color: rgb(84, 231, 71);
 }
 
 #decButton:after {
-  background-color:  rgb(231, 228, 71);
+  background-color: rgb(231, 228, 71);
 }
 
 #removeButton:after {
-  background-color:  rgb(231, 90, 71);
+  background-color: rgb(231, 90, 71);
 }
 
 .buttons_cart button:hover:after {
   bottom: 0;
   left: 0;
   right: 0;
-  transition: all 0.45s;
   top: 0;
+  transition: all 0.45s;
 }
 
 .message_cart {
@@ -143,12 +143,12 @@
 }
 
 .box_checkout_cart {
-  align-items: stretch;
   align-content: stretch;
+  align-items: stretch;
   background-color: rgb(221, 221, 221, 0.6);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(221, 221, 221, 0.7);
-  display: flex;  
+  display: flex;
   flex-flow: column wrap;
   justify-content: center;
   margin-top: 2vw;
@@ -176,7 +176,7 @@
 }
 
 .box_checkout_cart button:after {
-  background-color:  rgb(84, 231, 71);
+  background-color: rgb(84, 231, 71);
   background-image: url('../imgs/check-cart.png');
   background-position: center;
   background-repeat: no-repeat;
@@ -197,6 +197,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  transition: all 0.45s;
   top: 0;
+  transition: all 0.45s;
 }
