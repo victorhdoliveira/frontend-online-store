@@ -87,6 +87,7 @@ class Checkout extends React.Component {
             <h1>FRONT-END</h1>
             <h3>Online Store</h3>
           </div>
+          <h3>Pagamento</h3>
         </div>
         <div className="box_checkout">
           <div className="box_content_checkout">
@@ -94,7 +95,7 @@ class Checkout extends React.Component {
               <section className="item_cart_checkout" key={ ind }>
                 <h3 data-testid="shopping-cart-product-name">{item[0].title}</h3>
                 <img src={ item[0].thumbnail } alt={ item[0].title } />
-                <h3>{ `R$ ${item[0].price}` }</h3>
+                <h3>{ `R$ ${(item[0].price).toFixed(2)}` }</h3>
                 <h3 data-testid="shopping-cart-product-quantity">
                   { `Quantidade ${item.length}`}
                 </h3>
@@ -105,31 +106,33 @@ class Checkout extends React.Component {
           <form className="form_checkout">
             <fieldset className="form_personal">
               <legend>Informações da compra</legend>
-              <label htmlFor="name" className="name">
-                Nome:
-                <input
-                  id="name"
-                  type="text"
-                  value={ name }
-                  data-testid="checkout-fullname"
-                  onChange={ this.attEstado }
-                  placeholder="Nome Completo"
-                  required
-                />
-              </label>
-              <label htmlFor="email" className="email">
-                E-mail:
-                <input
-                  id="email"
-                  type="text"
-                  value={ email }
-                  data-testid="checkout-email"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                  onChange={ this.attEstado }
-                  placeholder="exemplo@email.com"
-                  required
-                />
-              </label>
+              <div className="personal_inf">
+                <label htmlFor="name" className="name">
+                  Nome:
+                  <input
+                    id="name"
+                    type="text"
+                    value={ name }
+                    data-testid="checkout-fullname"
+                    onChange={ this.attEstado }
+                    placeholder="Nome Completo"
+                    required
+                  />
+                </label>
+                <label htmlFor="email" className="email">
+                  E-mail:
+                  <input
+                    id="email"
+                    type="text"
+                    value={ email }
+                    data-testid="checkout-email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    onChange={ this.attEstado }
+                    placeholder="exemplo@email.com"
+                    required
+                  />
+                </label>
+              </div>
               <div className="box_inf">
                 <label htmlFor="cpf">
                   CPF:
@@ -185,7 +188,7 @@ class Checkout extends React.Component {
             </fieldset>
             <fieldset className="form_payment">
               <legend>Método de Pagamento:</legend>
-              <label htmlFor="Ticket">
+              <label htmlFor="Ticket" className="payment">
                 <input
                   id="Ticket"
                   name="radio"
@@ -196,7 +199,7 @@ class Checkout extends React.Component {
                 />
                 <img src={ barcode } alt="Código de Barras" />
               </label>
-              <label htmlFor="Visa">
+              <label htmlFor="Visa" className="payment">
                 <input
                   id="Visa"
                   name="radio"
@@ -207,7 +210,7 @@ class Checkout extends React.Component {
                 />
                 <img src={ visa } alt="Visa" />
               </label>
-              <label htmlFor="Master">
+              <label htmlFor="Master" className="payment">
                 <input
                   id="Master"
                   name="radio"
@@ -218,7 +221,7 @@ class Checkout extends React.Component {
                 />
                 <img src={ master } alt="Master" />
               </label>
-              <label htmlFor="Elo">
+              <label htmlFor="Elo" className="payment">
                 <input
                   id="Elo"
                   name="radio"

@@ -73,6 +73,7 @@ class ShoppingCard extends React.Component {
             <h1>FRONT-END</h1>
             <h3>Online Store</h3>
           </div>
+          <h3>Carrinho de Compras</h3>
         </div>
         <div className="box_cart">
           <div className="box_content_cart">
@@ -85,7 +86,7 @@ class ShoppingCard extends React.Component {
                 <img src={ item[0].thumbnail } alt={ item[0].title } />
                 <h3>
                   R$
-                  {item[0].price}
+                  { (item[0].price).toFixed(2) }
                 </h3>
                 <h3 data-testid="shopping-cart-product-quantity">
                   { `Quantidade ${item.length}`}

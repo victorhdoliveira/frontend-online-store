@@ -1,7 +1,11 @@
+/* eslint-disable react/jsx-max-depth */
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getListItem, getProductByRealId } from '../services/api';
+import '../styles/product.css';
+import star from '../imgs/star_1.png';
+import star2 from '../imgs/star_2.png';
 
 class Product extends React.Component {
   constructor() {
@@ -81,6 +85,12 @@ class Product extends React.Component {
 
   handleChangeInpt = (event) => {
     const { value, name } = event.target;
+    const FIVE = '5';
+    if (name === 'rating') {
+      const img = document.querySelectorAll('.star');
+      for (let i = 0; i < value; i += 1) { img[i].src = star2; }
+      for (let j = +value; j < FIVE; j += 1) { img[j].src = star; }
+    }
     this.setState({
       [name]: value,
       error: false,
@@ -106,30 +116,45 @@ class Product extends React.Component {
 
   render() {
     const { data, email, textareaInpt, error, review } = this.state;
+    const { pictures } = data;
+    const url = !pictures ? '' : pictures[0].url;
     return (
-      <div>
-        <div>
-          <Link to="/shopping-card" data-testid="shopping-cart-button">
-            Carrinho de compras
-          </Link>
-          <p data-testid="shopping-cart-size">{ getListItem() }</p>
-          <h2 data-testid="product-detail-name">{data.title}</h2>
-          <img
-            src={ data.thumbnail }
-            data-testid="product-detail-image"
-            alt="Foto do Produto"
-          />
-          <p data-testid="product-detail-price">{` Preço: ${data.price} R$`}</p>
-          <button
-            type="button"
-            data-testid="product-detail-add-to-cart"
-            onClick={ this.addCarrinho }
-          >
-            Adcionar ao carrinho
-          </button>
+      <div className="container_main_product">
+        <div className="box_header_product">
+          <div className="header_title_product">
+            <h1>FRONT-END</h1>
+            <h3>Online Store</h3>
+          </div>
+          <h3>Detalhes</h3>
+          <div className="header_product">
+            <Link to="/shopping-card" data-testid="shopping-cart-button">
+              <p data-testid="shopping-cart-size" id="qtdItems">{ getListItem() }</p>
+            </Link>
+          </div>
         </div>
-        <div>
-          <form>
+        <div className="box_product">
+          <div className="box_content_product">
+            <h2 data-testid="product-detail-name">{data.title}</h2>
+            <img
+              src={ url }
+              data-testid="product-detail-image"
+              alt={ data.title }
+              className="imgProduct"
+            />
+            <h3 data-testid="product-detail-price">
+              {` Preço: R$ ${Number(data.price).toFixed(2)} `}
+            </h3>
+            <button
+              type="button"
+              data-testid="product-detail-add-to-cart"
+              className="btn_add_product"
+              onClick={ this.addCarrinho }
+            >
+              Adicionar ao carrinho
+            </button>
+          </div>
+          <div className="box_content_product">
+            <h2>Avaliações</h2>
             <input
               data-testid="product-detail-email"
               type="text"
@@ -138,79 +163,89 @@ class Product extends React.Component {
               value={ email }
               onChange={ this.handleChangeInpt }
             />
-            <label htmlFor="rating1">
-              <input
-                type="radio"
-                name="rating"
-                value="1"
-                id="rating1"
-                onChange={ this.handleChangeInpt }
-                data-testid="1-rating"
-              />
-            </label>
-            <label htmlFor="rating2">
-              <input
-                type="radio"
-                name="rating"
-                value="2"
-                id="rating2"
-                onChange={ this.handleChangeInpt }
-                data-testid="2-rating"
-              />
-            </label>
-            <label htmlFor="rating3">
-              <input
-                type="radio"
-                name="rating"
-                value="3"
-                id="rating3"
-                onChange={ this.handleChangeInpt }
-                data-testid="3-rating"
-              />
-            </label>
-            <label htmlFor="rating4">
-              <input
-                type="radio"
-                name="rating"
-                value="4"
-                id="rating4"
-                onChange={ this.handleChangeInpt }
-                data-testid="4-rating"
-              />
-            </label>
-            <label htmlFor="rating5">
-              <input
-                type="radio"
-                name="rating"
-                value="5"
-                id="rating5"
-                onChange={ this.handleChangeInpt }
-                data-testid="5-rating"
-              />
-            </label>
+            <div>
+              <label htmlFor="rating1">
+                <input
+                  type="radio"
+                  name="rating"
+                  value="1"
+                  id="rating1"
+                  onChange={ this.handleChangeInpt }
+                  data-testid="1-rating"
+                />
+                <img src={ star } alt="1" className="star" />
+              </label>
+              <label htmlFor="rating2">
+                <input
+                  type="radio"
+                  name="rating"
+                  value="2"
+                  id="rating2"
+                  onChange={ this.handleChangeInpt }
+                  data-testid="2-rating"
+                />
+                <img src={ star } alt="2" className="star" />
+              </label>
+              <label htmlFor="rating3">
+                <input
+                  type="radio"
+                  name="rating"
+                  value="3"
+                  id="rating3"
+                  onChange={ this.handleChangeInpt }
+                  data-testid="3-rating"
+                />
+                <img src={ star } alt="3" className="star" />
+              </label>
+              <label htmlFor="rating4">
+                <input
+                  type="radio"
+                  name="rating"
+                  value="4"
+                  id="rating4"
+                  onChange={ this.handleChangeInpt }
+                  data-testid="4-rating"
+                />
+                <img src={ star } alt="4" className="star" />
+              </label>
+              <label htmlFor="rating5">
+                <input
+                  type="radio"
+                  name="rating"
+                  value="5"
+                  id="rating5"
+                  onChange={ this.handleChangeInpt }
+                  data-testid="5-rating"
+                />
+                <img src={ star } alt="5" className="star" />
+              </label>
+            </div>
             <textarea
               data-testid="product-detail-evaluation"
               placeholder="Mensagem detalhada (opcional)"
               name="textareaInpt"
+              rows="6"
               value={ textareaInpt }
               onChange={ this.handleChangeInpt }
             />
             <button
               type="button"
+              className="btn_review"
               data-testid="submit-review-btn"
               onClick={ this.clickButton }
             >
               Avaliar
             </button>
-            {error && <p data-testid="error-msg">Campos inválidos</p>}
-          </form>
-          <div>
-            {review.map((valor, index) => (
-              <div key={ index }>
-                <h4 data-testid="review-card-email">{valor.emailR}</h4>
-                <p data-testid="review-card-rating">{`Nota: ${valor.ratingR}`}</p>
-                <p data-testid="review-card-evaluation">{valor.textareaInptR}</p>
-              </div>))}
+            {error && <h3 data-testid="error-msg">Campos inválidos</h3>}
+            <div className="box_reviews">
+              {review.map((valor, index) => (
+                <div key={ index }>
+                  <p data-testid="review-card-email">{valor.emailR}</p>
+                  <p data-testid="review-card-rating">{`Nota: ${valor.ratingR}`}</p>
+                  <p data-testid="review-card-evaluation">{valor.textareaInptR}</p>
+                  <hr />
+                </div>))}
+            </div>
           </div>
         </div>
       </div>
