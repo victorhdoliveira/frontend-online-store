@@ -2,24 +2,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getListItem, getProductByRealId } from '../services/api';
-import '../styles/product.css';
 import star from '../imgs/star_1.png';
 import star2 from '../imgs/star_2.png';
+import { getListItem, getProductByRealId } from '../services/api';
+import '../styles/product.css';
 
 class Product extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      data: {},
-      email: '',
-      rating: 0,
-      textareaInpt: '',
-      error: false,
-      review: [],
-      valid: false,
-    };
-  }
+  state = {
+    data: {},
+    email: '',
+    rating: 0,
+    textareaInpt: '',
+    error: false,
+    review: [],
+    valid: false,
+  };
 
   componentDidMount() {
     this.getDataFromProduct();
@@ -42,7 +39,6 @@ class Product extends React.Component {
     }
   };
 
-  // peguei esse regex no stackoverflow
   validator = () => {
     const { email, rating } = this.state;
     const emailValidator = email
@@ -61,10 +57,7 @@ class Product extends React.Component {
       const dadosReview = { emailR: email, textareaInptR: textareaInpt, ratingR: rating };
       review.push(dadosReview);
       this.saveReview();
-      this.setState({
-        email: '',
-        textareaInpt: '',
-        valid: false,
+      this.setState({ email: '', textareaInpt: '', valid: false,
       });
     } else {
       this.setState({ error: true });
@@ -252,6 +245,7 @@ class Product extends React.Component {
     );
   }
 }
+
 Product.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -259,4 +253,5 @@ Product.propTypes = {
     }).isRequired,
   }).isRequired,
 };
+
 export default Product;

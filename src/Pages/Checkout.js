@@ -1,27 +1,24 @@
 /* eslint-disable react/jsx-max-depth */
-import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/checkout.css';
-import visa from '../imgs/visa-48.png';
-import master from '../imgs/mastercard-48.png';
+import React from 'react';
 import barcode from '../imgs/barcode-product.png';
+import master from '../imgs/mastercard-48.png';
 import paypal from '../imgs/paypal-48.png';
+import visa from '../imgs/visa-48.png';
+import '../styles/checkout.css';
 
 class Checkout extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      listShoppingCard: [],
-      name: '',
-      email: '',
-      cpf: '',
-      phoneNumber: '',
-      cep: '',
-      address: '',
-      radio: undefined,
-      inputInvalid: false,
-    };
-  }
+  state = {
+    listShoppingCard: [],
+    name: '',
+    email: '',
+    cpf: '',
+    phoneNumber: '',
+    cep: '',
+    address: '',
+    radio: undefined,
+    inputInvalid: false,
+  };
 
   componentDidMount() {
     this.getListItem();
@@ -43,7 +40,7 @@ class Checkout extends React.Component {
     }
   };
 
-  finalizaForm = () => { // its about honor
+  finalizaForm = () => {
     const { history } = this.props;
     const { name, email, cpf, phoneNumber, cep, address, radio } = this.state;
     const min = 3;
@@ -74,7 +71,6 @@ class Checkout extends React.Component {
     } else {
       this.setState({ [id]: value });
     }
-    console.log(this.state);
   };
 
   render() {
