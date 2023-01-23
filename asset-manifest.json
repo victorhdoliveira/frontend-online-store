@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/front-end-online-store/static/css/main.61f2d67c.css",
-    "main.js": "/front-end-online-store/static/js/main.d779e032.js",
-    "static/media/background_body.jpg": "/front-end-online-store/static/media/background_body.173744a876265903708a.jpg",
-    "static/media/search.png": "/front-end-online-store/static/media/search.a66ad5267248a41a88b7.png",
-    "static/media/star_1.png": "/front-end-online-store/static/media/star_1.069cda5a63ba6f84b00b.png",
-    "static/media/star_2.png": "/front-end-online-store/static/media/star_2.f3bcb98cc95969b881e0.png",
-    "static/media/add-cart.png": "/front-end-online-store/static/media/add-cart.8d2ed2b122ffb50ae5cb.png",
-    "static/media/check-cart.png": "/front-end-online-store/static/media/check-cart.535a091a716adc100cdc.png",
-    "static/media/shopping-cart.png": "/front-end-online-store/static/media/shopping-cart.955a9b8b4f8032bff9bc.png",
-    "static/media/del-cart.png": "/front-end-online-store/static/media/del-cart.b149430c53e272c4d7da.png",
-    "index.html": "/front-end-online-store/index.html",
-    "main.61f2d67c.css.map": "/front-end-online-store/static/css/main.61f2d67c.css.map",
-    "main.d779e032.js.map": "/front-end-online-store/static/js/main.d779e032.js.map"
+    "main.css": "/app-toot-name/static/css/main.2773c77c.css",
+    "main.js": "/app-toot-name/static/js/main.fd33b761.js",
+    "static/media/background_body.jpg": "/app-toot-name/static/media/background_body.173744a876265903708a.jpg",
+    "static/media/search.png": "/app-toot-name/static/media/search.a66ad5267248a41a88b7.png",
+    "static/media/star_1.png": "/app-toot-name/static/media/star_1.069cda5a63ba6f84b00b.png",
+    "static/media/star_2.png": "/app-toot-name/static/media/star_2.f3bcb98cc95969b881e0.png",
+    "static/media/add-cart.png": "/app-toot-name/static/media/add-cart.8d2ed2b122ffb50ae5cb.png",
+    "static/media/check-cart.png": "/app-toot-name/static/media/check-cart.535a091a716adc100cdc.png",
+    "static/media/shopping-cart.png": "/app-toot-name/static/media/shopping-cart.955a9b8b4f8032bff9bc.png",
+    "static/media/del-cart.png": "/app-toot-name/static/media/del-cart.b149430c53e272c4d7da.png",
+    "index.html": "/app-toot-name/index.html",
+    "main.2773c77c.css.map": "/app-toot-name/static/css/main.2773c77c.css.map",
+    "main.fd33b761.js.map": "/app-toot-name/static/js/main.fd33b761.js.map"
   },
   "entrypoints": [
-    "static/css/main.61f2d67c.css",
-    "static/js/main.d779e032.js"
+    "static/css/main.2773c77c.css",
+    "static/js/main.fd33b761.js"
   ]
 }
