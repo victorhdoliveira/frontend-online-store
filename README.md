@@ -1,19 +1,29 @@
-(grupo - data de entrega 20/10/2022)
+<h1> Projeto Front-End Online Store </h1>
 
-https://victorhdoliveira.github.io/frontend-online-store
+<p>Deploy:
+  <a href="https://victorhdoliveira.github.io/frontend-online-store" target="_blank">
+    Front End Online Store
+  </a>
+</p>
 
-Grupo 24-B (Melhor grupo EVER!!!) heartheartheartheartheart
-Integrantes:
-art Elisabete Martins de Oliveira
-mortar_board Nathalia Jara Cantarelli
-necktie Rafael Musse
-runner Thiago Manhães
-100 Victor Hugo de Oliveira
-Por ser o primeiro a ser realizado em grupo, esse projeto tinha tudo pra ser caótico mas o grupo desenvolveu uma sintonia, uma integração e uma amizade tão grandes que, à partir do compromisso e colaboração de todos, atingimos o resultado esperado em poucos dias.
+Grupo 24-B
+Data de entrega: 20/10/2022
+
+<h3>Integrantes:</h3>
+<ul>
+   <li>Elisabete Martins de Oliveira</li>
+   <li>Nathalia Jara Cantarelli</li>
+   <li>Rafael Musse</li>
+   <li>Thiago Manhães</li>
+   <li>Victor Hugo de Oliveira</li>
+</ul>
+
+Por ser o primeiro a ser realizado em grupo, esse projeto tinha tudo pra ser caótico, mas o grupo desenvolveu uma sintonia. 
+Gerando uma integração e uma amizade tão grandes que, à partir do compromisso e colaboração de todos, atingimos o resultado esperado em poucos dias.
 
 Formamos a equipe que qualquer empresa gostaria de ter e, mais do que isso, nos tornamos amigos que eu vou levar pra sempre!
 
-Descrição
+<h3>Descrição:</h3>
 Criamos uma versão simplificada de um Front-End de um e-commerce alimentado por uma API do Mercado Livre em que é possível:
 
 Buscar produtos por termos e categorias;
